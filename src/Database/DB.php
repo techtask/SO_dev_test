@@ -1,6 +1,6 @@
 <?php
 
-namespace silverorange\DevTest;
+namespace silverorange\DevTest\Database;
 
 class DB
 {
