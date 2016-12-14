@@ -19,11 +19,11 @@ public class PostController extends AbstractController
   {
     // Do validation of arguments here.
     $id = $this->ArgumentValidator->parseInt($this->arguments[0]);
-    if ($this->ArgumentValidator->validateInt($id) === false) {
+    if ($this->ArgumentValidator->isInt($id) === false) {
       throw new InvalidArgumentException
     };
     $post = $this->modelFactory->create($id);
-    $view = $this->viewFactory->create("postView");
+    $view = $this->viewFactory->create("singlePost");
     $view->setModel($post);
     $view->render();
   }
@@ -31,7 +31,7 @@ public class PostController extends AbstractController
   private function displayDefault()
   {
     // Ignore arguments and display error.
-    $view = $this->viewFactory("error");
+    $view = $this->viewFactory->create("error");
     $view->setError("No such post");
     $view->render();
   }
