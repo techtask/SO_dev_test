@@ -2,6 +2,6 @@
 
 namespace silverorange\DevTest\Exceptions;
 
-class InvalidRequestMethodException extends \Exception
+class InvalidViewException extends \Exception
 {
 }

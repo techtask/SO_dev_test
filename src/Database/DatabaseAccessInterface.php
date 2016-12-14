@@ -2,6 +2,6 @@
 
 namespace silverorange\DevTest\Database;
 
-public interface DatabaseAccessInterface
+interface DatabaseAccessInterface
 {
 }

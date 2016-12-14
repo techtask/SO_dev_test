@@ -2,6 +2,6 @@
 
 namespace silverorange\Model;
 
-public interface ModelFactoryInterface
+interface ModelFactoryInterface
 {
 }

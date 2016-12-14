@@ -4,9 +4,9 @@ namespace silverorange\DevTest\Model;
 
 use silverorange\DevTest\ModelFactory;
 
-public class PostModelFactory extends ModelFactory
+class PostModelFactory extends ModelFactory
 {
-  public function create()
-  {
-  }
+    public function create()
+    {
+    }
 }

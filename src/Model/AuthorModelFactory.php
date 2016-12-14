@@ -4,9 +4,9 @@ namespace silverorange\DevTest\Model;
 
 use silverorange\DevTest\ModelFactory;
 
-public class AuthorModelFactory extends ModelFactory
+class AuthorModelFactory extends ModelFactory
 {
-  public function create()
-  {
-  }
+    public function create()
+    {
+    }
 }

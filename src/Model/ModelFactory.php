@@ -2,13 +2,12 @@
 
 namespace silverorange\DevTest\Model;
 
-public class ModelFactory implements ModelFactoryInterface
+class ModelFactory implements ModelFactoryInterface
 {
+    protected $dal;
 
-  protected $dal;
-
-  public function __construct(DatabaseAccessInterface $dal)
-  {
-    $this->dal = $dal;
-  }
+    public function __construct(DatabaseAccessInterface $dal)
+    {
+        $this->dal = $dal;
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace silverorange\DevTest\View;
 
-public class ViewFactory implements ViewFactoryInterface
+class ViewFactory implements ViewFactoryInterface
 {
-  abstract public function create($name);
+    abstract public function create($name);
 }

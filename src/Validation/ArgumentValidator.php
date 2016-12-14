@@ -7,16 +7,15 @@ namespace silverorange\DevTest\Validation;
  * Also should use separate validation library. Included only for completion!
  *
  */
-public class ArgumentValidator
+class ArgumentValidator
 {
+    public function parseInt($var)
+    {
+        return (int)$var;
+    }
 
-  public function parseInt($var)
-  {
-    return (int)$var;
-  }
-
-  public function isInt($var)
-  {
-    return is_int($var));
-  }
+    public function isInt($var)
+    {
+        return is_int($var);
+    }
 }
