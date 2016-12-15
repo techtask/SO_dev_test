@@ -9,8 +9,8 @@ class Route
 
     public function __construct($route, array $arguments)
     {
-        $this-$route = $route;
-        $this->$arguments = $arguments;
+        $this->route = $route;
+        $this->arguments = $arguments;
     }
 
     public function getRoute()

@@ -5,6 +5,7 @@ namespace silverorange\DevTest\Control;
 use silverorange\DevTest\Validation\CommandValidator;
 use silverorange\DevTest\Control\RouteFactory;
 use silverorange\DevTest\Exceptions\InvalidMethodException;
+use silverorange\DevTest\Control\RouteParserInterface;
 
 class CommandParser implements RouteParserInterface
 {

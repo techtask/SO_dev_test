@@ -2,6 +2,9 @@
 
 namespace silverorange\DevTest\Model;
 
+use silverorange\DevTest\Model\ModelFactoryInterface;
+use silverorange\DevTest\Database\DatabaseAccessInterface;
+
 class ModelFactory implements ModelFactoryInterface
 {
     protected $dal;

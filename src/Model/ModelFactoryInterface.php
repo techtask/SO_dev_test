@@ -1,6 +1,6 @@
 <?php
 
-namespace silverorange\Model;
+namespace silverorange\DevTest\Model;
 
 interface ModelFactoryInterface
 {
