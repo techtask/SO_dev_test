@@ -14,7 +14,7 @@ class ImportPostValidator
     {
         // Check if each value is set.
         
-        $vars = array("id", "title", "body", "modified_at", "created_at", "author"); 
+        $vars = array("id", "title", "body", "modified_at", "created_at", "author");
 
         foreach ($vars as $key => $var) {
             if (!isset($json[$var])) {
@@ -24,14 +24,14 @@ class ImportPostValidator
 
         // Check types and required fields. Making some assumptions here. Null fields can be emptystring.
 
-        $vars = array("id", "title", "modified_at", "created_at", "author"); 
+        $vars = array("id", "title", "modified_at", "created_at", "author");
         foreach ($vars as $var) {
             if (empty($json[$var])) {
                 return false;
             }
         }
 
-        $vars = array("modified_at", "created_at"); 
+        $vars = array("modified_at", "created_at");
         foreach ($vars as $var) {
             if ($this->validateDateString($json[$var]) !== true) {
                 return false;

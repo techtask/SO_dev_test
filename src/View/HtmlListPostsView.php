@@ -6,15 +6,14 @@ use \Michelf\Markdown;
 
 class HtmlListPostsView extends HtmlView
 {
-
     public $template = "HtmlListPosts";
     public $post;
 
-    public function setPosts(Array $posts)
+    public function setPosts(array $posts)
     {
         $this->posts = $posts;
 
-        foreach($posts as $post) {
+        foreach ($posts as $post) {
             $post->body = Markdown::defaultTransform($post->body);
         }
     }

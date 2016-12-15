@@ -28,7 +28,7 @@ class ConsoleListPostsController extends AbstractController
         $data = array("error" => false);
 
         $data = $this->modelFactory->dal->readAllWithAuthors();
-        if ($data === false || is_null($data) ) {
+        if ($data === false || is_null($data)) {
             return null;
         }
         $posts = array();

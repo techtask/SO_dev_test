@@ -26,8 +26,7 @@ class View implements ViewInterface
         ob_start();
         try {
             include($this->template . '.tpl');
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             ob_get_clean();
             // FIXME
             die("Render Error.");

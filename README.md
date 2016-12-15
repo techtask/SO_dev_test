@@ -21,7 +21,7 @@ a few controllers.
 A few things I ran out of time for:
 
 * Parameter validation and Type checking (this should be done in the model either in the constructor, or during a setParameter() method.)
-* Decent sanitization/validation routines. I have put in the basics, but these would not be production ready.
+* Decent sanitization/validation routines. I have put in the basics, but these would not be production ready. Should really use something like HTMLPurifier.
 * Request/Response objects and dispatcher. These I skipped for brevity.
 * Real templating. I decided to use php native templating for simplicity. Twig would probably have been better.
 * Tests, phpdoc comments.

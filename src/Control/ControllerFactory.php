@@ -16,7 +16,7 @@ class ControllerFactory
     protected $argumentValidator;
     protected $commandList;
 
-    public function __construct(Array $paths, $defaultPath, Array $modelFactories, ViewFactory $viewFactory, ArgumentValidator $argumentValidator, Array $commandList)
+    public function __construct(array $paths, $defaultPath, array $modelFactories, ViewFactory $viewFactory, ArgumentValidator $argumentValidator, array $commandList)
     {
         $this->paths = $paths;
         $this->defaultPath = $defaultPath;

@@ -20,8 +20,7 @@ class FrontController
             $view = $this->router->route($_SERVER['REQUEST_URI']);
             // At this point we would send a response object, but I am cheating and will just send headers and body.
             $this->sendHeaders();
-        }
-        else {
+        } else {
             // Set a custom route for the CLI tool.
             // Note this is a dummy path. Could create a separate tool, or do proper argument parsing on CLI etc. FIXME
             $path = "/";

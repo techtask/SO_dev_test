@@ -13,9 +13,8 @@ class ImportPostModel
         $this->validator = $validator;
     }
 
-    public function importPostsFromFiles(Array $files)
+    public function importPostsFromFiles(array $files)
     {
-
         $data = array("error" => false);
         $models = array();
         foreach ($files as $file) {
@@ -30,7 +29,7 @@ class ImportPostModel
                 $json = json_decode($contents, true);
             } catch (\Exception $e) {
                 $data["error"] = true;
-                $data["errorMessage"] = "Invalid json in file $file. " . $e->getMessage(); 
+                $data["errorMessage"] = "Invalid json in file $file. " . $e->getMessage();
                 return $data;
             }
 
@@ -46,14 +45,11 @@ class ImportPostModel
                     $data["errorMessage"] = "Json does not specify correct parameters in file $file.";
                     return $data;
                 }
-            }
-            catch (\Exception $e) {
+            } catch (\Exception $e) {
                 $data["error"] = true;
-                $data["errorMessage"] = "Error inserting post from file $file into the database. " . $e->getMessage(); 
+                $data["errorMessage"] = "Error inserting post from file $file into the database. " . $e->getMessage();
                 return $data;
             }
-
-
         }
         $data["posts"] = $models;
         return $data;

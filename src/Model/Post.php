@@ -36,12 +36,11 @@ class Post extends AbstractModel
     {
         try {
             $data = $this->dal->read($this->id);
-        }
-        catch (NoSuchRecordException $e) {
+        } catch (NoSuchRecordException $e) {
             return false;
         }
 
-        if(is_null($data)) {
+        if (is_null($data)) {
             return false;
         }
 
@@ -61,12 +60,10 @@ class Post extends AbstractModel
     {
         try {
             $this->dal->update($this->id, $this->title, $this->body, $this->created_at, $this->modified_at, $this->author);
-        }
-        catch (NoSuchRecordException $e) {
+        } catch (NoSuchRecordException $e) {
             try {
                 $this->dal->create($this->id, $this->title, $this->body, $this->created_at, $this->modified_at, $this->author);
-            }
-            catch (\Exception $e) {
+            } catch (\Exception $e) {
                 throw new InsertModelException("Error creating post with id: " . $this->id . ": " . $e->getMessage());
             }
         }
@@ -76,14 +73,11 @@ class Post extends AbstractModel
     {
         try {
             $this->dal->delete($this->id);
-        }
-        catch (NoSuchRecordException $e) {
-            ;;
-        }
-        catch (\Exception $e)
-        {
+        } catch (NoSuchRecordException $e) {
+            ;
+            ;
+        } catch (\Exception $e) {
             throw new DeleteModelException("Error deleting post with id: " . $this->id . ": " . $e->getMessage());
         }
     }
-
 }

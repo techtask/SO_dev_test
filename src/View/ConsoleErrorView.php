@@ -4,7 +4,6 @@ namespace silverorange\DevTest\View;
 
 class ConsoleErrorView extends ConsoleView
 {
-
     public $error = "";
     public $template = "ConsoleError";
 

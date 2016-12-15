@@ -60,11 +60,11 @@ class Bootstrap
 
       // Views
       if (Console\Console::isConsole()) {
-        $sanitizer = new Validation\ConsoleSanitizer(); 
-        $viewFactory = new View\ViewFactory($sanitizer);
+          $sanitizer = new Validation\ConsoleSanitizer();
+          $viewFactory = new View\ViewFactory($sanitizer);
       } else {
-        $sanitizer = new Validation\HtmlSanitizer(); 
-        $viewFactory = new View\ViewFactory($sanitizer);
+          $sanitizer = new Validation\HtmlSanitizer();
+          $viewFactory = new View\ViewFactory($sanitizer);
       }
     
       // Routing
@@ -76,9 +76,9 @@ class Bootstrap
       $controllerFactory = new Control\ControllerFactory($config->getPaths(), $config->getDefaultPath(), $modelFactories, $viewFactory, $argumentValidator, $config->getCommandList());
 
       if (Console\Console::isConsole()) {
-        $parser = new Control\CommandParser($routeFactory, $commandValidator, $console->getConsoleArguments(), $config->getCommandList());
+          $parser = new Control\CommandParser($routeFactory, $commandValidator, $console->getConsoleArguments(), $config->getCommandList());
       } else {
-        $parser = new Control\UrlParser($routeFactory, $urlValidator);
+          $parser = new Control\UrlParser($routeFactory, $urlValidator);
       }
 
       $router = new Control\Router($parser, $controllerFactory, $routeFactory->createRoute($config->getDefaultPath(), array()));
@@ -86,5 +86,4 @@ class Bootstrap
       $app = new Control\FrontController($router);
       $app->run();
   }
-
 }

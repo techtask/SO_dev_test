@@ -12,25 +12,24 @@ class PostCRUD extends DatabaseAccessLayer
         try {
             $pdo->beginTransaction();
             $stmt = $pdo->prepare("INSERT INTO posts (id, title, body, created_at, modified_at, author) VALUES (:id, :title, :body, :created_at, :modified_at, :author)");
-            $stmt->bindParam(":id",$id);
-            $stmt->bindParam(":title",$title);
-            $stmt->bindParam(":body",$body);
-            $stmt->bindParam(":created_at",$created_at);
-            $stmt->bindParam(":modified_at",$modified_at);
-            $stmt->bindParam(":author",$author);
+            $stmt->bindParam(":id", $id);
+            $stmt->bindParam(":title", $title);
+            $stmt->bindParam(":body", $body);
+            $stmt->bindParam(":created_at", $created_at);
+            $stmt->bindParam(":modified_at", $modified_at);
+            $stmt->bindParam(":author", $author);
             $res = $stmt->execute();
             $pdo->commit();
 
             if ($res !== true) {
-               return false;
+                return false;
             }
 
             $count = $stmt->rowCount();
-            if($count === 0) {
+            if ($count === 0) {
                 throw new NoSuchRecordException("No Insert was performed.");
             }
-        }
-        catch (\PDOException $e) {
+        } catch (\PDOException $e) {
             // FIXME Error handling here.
             $pdo->rollback();
             return false;
@@ -42,16 +41,15 @@ class PostCRUD extends DatabaseAccessLayer
     {
         $pdo = $this->db->getConnection();
         try {
-            $stmt = $pdo->prepare("SELECT * FROM posts WHERE id = :id"); 
-            $stmt->bindParam(":id",$id);
+            $stmt = $pdo->prepare("SELECT * FROM posts WHERE id = :id");
+            $stmt->bindParam(":id", $id);
             $stmt->execute();
             $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             $count = $stmt->rowCount();
-            if($count === 0) {
+            if ($count === 0) {
                 throw new NoSuchRecordException("No matches were found.");
             }
-        }
-        catch (\PDOException $e) {
+        } catch (\PDOException $e) {
             // FIXME Error handling here.
             return null;
         }
@@ -62,15 +60,14 @@ class PostCRUD extends DatabaseAccessLayer
     {
         $pdo = $this->db->getConnection();
         try {
-            $stmt = $pdo->prepare("SELECT * FROM posts INNER JOIN authors ON posts.author = authors.id"); 
+            $stmt = $pdo->prepare("SELECT * FROM posts INNER JOIN authors ON posts.author = authors.id");
             $stmt->execute();
             $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
             $count = $stmt->rowCount();
-            if($count === 0) {
+            if ($count === 0) {
                 throw new NoSuchRecordException("No matches were found.");
             }
-        }
-        catch (\PDOException $e) {
+        } catch (\PDOException $e) {
             // FIXME Error handling here.
             echo "Error: " . $e->getMessage();
             return null;
@@ -84,24 +81,23 @@ class PostCRUD extends DatabaseAccessLayer
         try {
             $pdo->beginTransaction();
             $stmt = $pdo->prepare("UPDATE posts SET title = :title, body = :body, created_at = :created_at, modified_at = :modified_at, author = :author WHERE id = :id");
-            $stmt->bindParam(":id",$id);
-            $stmt->bindParam(":title",$title);
-            $stmt->bindParam(":body",$body);
-            $stmt->bindParam(":created_at",$created_at);
-            $stmt->bindParam(":modified_at",$modified_at);
-            $stmt->bindParam(":author",$author);
+            $stmt->bindParam(":id", $id);
+            $stmt->bindParam(":title", $title);
+            $stmt->bindParam(":body", $body);
+            $stmt->bindParam(":created_at", $created_at);
+            $stmt->bindParam(":modified_at", $modified_at);
+            $stmt->bindParam(":author", $author);
             $res = $stmt->execute();
             $pdo->commit();
 
             if ($res !== true) {
-               return false;
+                return false;
             }
             $count = $stmt->rowCount();
-            if($count === 0) {
+            if ($count === 0) {
                 throw new NoSuchRecordException("No updates were made.");
             }
-        }
-        catch (\PDOException $e) {
+        } catch (\PDOException $e) {
             // FIXME Error handling here.
             $pdo->rollback();
             return false;
@@ -114,19 +110,18 @@ class PostCRUD extends DatabaseAccessLayer
         $pdo = $this->db->getConnection();
         try {
             $pdo->beginTransaction();
-            $stmt = $pdo->prepare("DELETE FROM posts WHERE id = :id"); 
-            $stmt->bindParam(":id",$id);
+            $stmt = $pdo->prepare("DELETE FROM posts WHERE id = :id");
+            $stmt->bindParam(":id", $id);
             $res = $stmt->execute();
             if ($res !== true) {
-               return false;
+                return false;
             }
             $count = $stmt->rowCount();
-            if($count === 0) {
+            if ($count === 0) {
                 throw new NoSuchRecordException("No deletions were made.");
             }
             $pdo->commit();
-        }
-        catch (\PDOException $e) {
+        } catch (\PDOException $e) {
             // FIXME Error handling here.
             $pdo->rollback();
             return false;

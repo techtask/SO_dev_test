@@ -6,7 +6,7 @@ class CommandValidator
 {
     protected $commandList;
 
-    public function __construct(Array $commandList)
+    public function __construct(array $commandList)
     {
         $this->commandList = $commandList;
     }
@@ -17,8 +17,7 @@ class CommandValidator
 
         if (isset($this->commandList[$command])) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }

@@ -11,8 +11,7 @@ class PostWithAuthorModelFactory extends ModelFactory
     {
         try {
             $model = new \silverorange\DevTest\Model\PostWithAuthor($this->dal, $id, $title, $body, $modified_at, $created_at, $author, $authorName);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             throw new CreateModelException("Error creating post with id $id:" .  $e->getMessage());
         }
         return $model;

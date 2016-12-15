@@ -7,7 +7,6 @@ use Michelf\Markdown;
 
 class HtmlPostView extends HtmlView
 {
-
     public $template = "HtmlPost";
     public $post;
 

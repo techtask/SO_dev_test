@@ -8,5 +8,4 @@ class DatabaseAccessLayer implements DatabaseAccessInterface
     {
         $this->db = $db;
     }
-
 }

@@ -11,7 +11,7 @@ class Config
     protected $commandList = array();
     protected $defaultPath;
 
-    public function __construct($databaseUsername, $databasePassword, Array $paths, Array $commandList, $defaultPath)
+    public function __construct($databaseUsername, $databasePassword, array $paths, array $commandList, $defaultPath)
     {
         $this->databaseUsername = $databaseUsername;
         $this->databasePassword = $databasePassword;

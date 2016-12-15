@@ -6,7 +6,7 @@ class ConsoleSanitizer implements SanitizerInterface
 {
     /**
      * This is a placeholder. Should really do regex/fork/parenthesis and encoding checking.
-     * 
+     *
      *
      */
 

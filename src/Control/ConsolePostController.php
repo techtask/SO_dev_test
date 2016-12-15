@@ -30,8 +30,7 @@ class ConsolePostController extends AbstractController
         $result = $postModel->update();
         if ($result === true) {
             return $postModel;
-        }
-        else {
+        } else {
             return null;
         }
     }

@@ -42,12 +42,11 @@ class PostWithAuthor extends AbstractModel
     {
         try {
             $data = $this->dal->readWithAuthor($this->id);
-        }
-        catch (NoSuchRecordException $e) {
+        } catch (NoSuchRecordException $e) {
             return false;
         }
 
-        if(is_null($data)) {
+        if (is_null($data)) {
             return false;
         }
 
