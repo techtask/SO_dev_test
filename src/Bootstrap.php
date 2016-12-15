@@ -42,8 +42,12 @@ class Bootstrap
       $authorModelFactory = new Model\AuthorModelFactory($authorCRUD);
       // This is a hack, should really be done dynamically, but left this way for simplicity.
       $modelFactories = array(
-       "post" => $postModelFactory,
-       "author" => $authorModelFactory,
+        "default" => $postModelFactory, // FIXME This only works because the default console controller doesn't use it.
+        "post" => $postModelFactory,
+        "author" => $authorModelFactory,
+        "import" => $postModelFactory,
+        "error" => $postModelFactory, // FIXME same here
+        "help" => $postModelFactory // FIXME same issue.
       );
 
       // Views

@@ -2,7 +2,7 @@
 
 namespace silverorange\DevTest\View;
 
-class ViewFactory
+class ViewFactory implements ViewFactoryInterface
 {
     public function create($name)
     {

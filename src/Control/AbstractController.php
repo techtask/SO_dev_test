@@ -2,6 +2,10 @@
 
 namespace silverorange\DevTest\Control;
 
+use silverorange\DevTest\Model\ModelFactoryInterface;
+use silverorange\DevTest\View\ViewFactoryInterface;
+use silverorange\DevTest\Validation\ArgumentValidator;
+
 abstract class AbstractController
 {
     protected $arguments;
