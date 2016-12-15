@@ -14,5 +14,6 @@ class PostViewFactory
         } catch (\Exception $e) {
             throw new InvalidViewException("No such view.");
         }
+        return $view;
     }
 }
