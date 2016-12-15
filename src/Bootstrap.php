@@ -25,7 +25,9 @@ class Bootstrap
 
       $commandList = array(
           "default" => "ConsoleErrorController",
-          "import" => "ConsoleImportController",
+          "import-posts" => "ConsoleImportController",
+          "show-post" => "ConsolePostController",
+          "list-posts" => "ConsoleImportController",
           "error" => "ConsoleErrorController",
           "help" => "ConsoleErrorController",
       );
@@ -48,7 +50,9 @@ class Bootstrap
         "default" => $postModelFactory, // FIXME This only works because the default console controller doesn't use it.
         "post" => $postModelFactory,
         "author" => $authorModelFactory,
-        "import" => $importPostModelFactory,
+        "import-posts" => $importPostModelFactory,
+        "show-post" => $postModelFactory,
+        "list-posts" => $postModelFactory,
         "error" => $postModelFactory, // FIXME same here
         "help" => $postModelFactory// FIXME same issue.
       );

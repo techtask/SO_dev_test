@@ -32,7 +32,6 @@ class PostCRUD extends DatabaseAccessLayer
         }
         catch (\PDOException $e) {
             // FIXME Error handling here.
-            echo "WHAT IS IT?" . $e->getMessage();
             $pdo->rollback();
             return false;
         }
@@ -45,13 +44,18 @@ class PostCRUD extends DatabaseAccessLayer
         try {
             $stmt = $pdo->prepare("SELECT * FROM posts WHERE id = :id"); 
             $stmt->bindParam(":id",$id);
-            $res = $stmt->execute();
+            $stmt->execute();
+            $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $count = $stmt->rowCount();
+            if($count === 0) {
+                throw new NoSuchRecordException("No matches were found.");
+            }
         }
         catch (\PDOException $e) {
             // FIXME Error handling here.
             return null;
         }
-        return $res;
+        return $data[0];
     }
 
     public function update($id, $title, $body, $created_at, $modified_at, $author)

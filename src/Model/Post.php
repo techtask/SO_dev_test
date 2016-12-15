@@ -32,6 +32,31 @@ class Post extends AbstractModel
         return $this->title;
     }
 
+    public function update()
+    {
+        try {
+            $data = $this->dal->read($this->id);
+        }
+        catch (NoSuchRecordException $e) {
+            return false;
+        }
+
+        if(is_null($data)) {
+            return false;
+        }
+
+        // FIXME Should use getters/setters for encapsulation.
+
+        print_r($data);
+        $this->title = $data['title'];
+        $this->body = $data['body'];
+        $this->created_at = $data['created_at'];
+        $this->modified_at = $data['modified_at'];
+        $this->author = $data['author'];
+
+        return true;
+    }
+
     public function save()
     {
         try {
