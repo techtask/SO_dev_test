@@ -43,6 +43,7 @@ class CommandParser implements RouteParserInterface
         }
         else {
             $route = $command;
+            array_shift($this->arguments); // No need for main command in arguments after setting it.
         }
 
         return $this->routeFactory->createRoute($route, $this->arguments);

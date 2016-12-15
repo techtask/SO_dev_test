@@ -2,7 +2,7 @@
 
 namespace silverorange\DevTest\Model;
 
-use silverorange\DevTest\Model\AbstractModel;
+use silverorange\DevTest\Database\DatabaseAccessInterface;
 use silverorange\DevTest\Exceptions\NoSuchRecordException;
 use silverorange\DevTest\Exceptions\CreateModelException;
 use silverorange\DevTest\Exceptions\DeleteModelException;

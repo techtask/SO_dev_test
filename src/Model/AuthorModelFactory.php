@@ -10,7 +10,7 @@ class AuthorModelFactory extends ModelFactory
     public function create($id, $name, $created_at, $modified_at)
     {
         try {
-            $model = new silverorange\DevTest\AuthorModel($this->dal, $id, $name, $created_at, $modified_at);
+            $model = new \silverorange\DevTest\Model\Author($this->dal, $id, $name, $created_at, $modified_at);
         }
         catch (\Exception $e) {
             throw new CreateModelException("Error creating author with id $id:" .  $e->getMessage());

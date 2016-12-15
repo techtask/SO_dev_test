@@ -27,7 +27,7 @@ class ImportPostModel
             }
 
             try {
-                $json = json_decode($contents);
+                $json = json_decode($contents, true);
             } catch (\Exception $e) {
                 $data["error"] = true;
                 $data["errorMessage"] = "Invalid json in file $file. " . $e->getMessage(); 

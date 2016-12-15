@@ -16,7 +16,7 @@ class ImportPostValidator
         
         $vars = array("id", "title", "body", "modified_at", "created_at", "author"); 
 
-        foreach ($vars as $var) {
+        foreach ($vars as $key => $var) {
             if (!isset($json[$var])) {
                 return false;
             }

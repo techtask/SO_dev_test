@@ -2,6 +2,8 @@
 
 namespace silverorange\DevTest\Model;
 
+use silverorange\DevTest\Database\DatabaseAccessInterface;
+
 abstract class AbstractModel
 {
     public $dal;
