@@ -26,7 +26,11 @@ class CommandParser implements RouteParserInterface
     public function parseRoute($command = null)
     {
         try {
-            $command = $this->arguments[0];
+            if (!empty($this->arguments)) {
+                $command = $this->arguments[0];
+            } else {
+                $command = null;
+            }
             $command = $this->commandValidator->normalize($command);
         }
         catch (\Exception $e)

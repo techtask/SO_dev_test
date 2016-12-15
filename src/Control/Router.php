@@ -24,10 +24,21 @@ class Router
     {
         try {
             $route = $this->parser->parseRoute($route);
-        } catch (\Exception $e) {
-            // No route found, send to default.
+        } catch (InvalidUrlException $e) {
+            // No route found, send to error.
             // Note this is really validated twice since it is also done in controllerFactory.
+
             $route = $this->defaultRoute;
+            $route->setArgument("error", "Invalid path specified => " . $e->getMessage());
+        } catch (InvalidRequestMethodException $e) {
+            $route = $this->defaultRoute;
+            $route->setArgument("error", "Invalid http method specified => " . $e->getMessage());
+        } catch (InvalidCommandException $e) {
+            $route = $this->defaultRoute;
+            $route->setArgument("error", "Invalid command specified => " . $e->getMessage());
+        } catch (\Exception $e) {
+            $route = $this->defaultRoute;
+            $route->setArgument("error", "Unknown Error => " . $e->getMessage());
         }
 
         $result = "";

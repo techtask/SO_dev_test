@@ -16,7 +16,7 @@ class Bootstrap
       // FIXME This should be elsewhere. Maybe json.
       $databaseUser = 'me';
       $paths = array(
-          "default" => "PostController",
+          "default" => "ErrorController",
           "post" => "PostController",
           "author" => "AuthorController",
           "error" => "ErrorController"

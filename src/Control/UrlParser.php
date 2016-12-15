@@ -23,19 +23,16 @@ class UrlParser
     */
     public function parseRoute($url)
     {
-        // Normalize url. (remove http:// and any www. etc)
         $url = $this->URLValidator->normalize($url);
 
         if ($this->URLValidator->validate($url) !== true) {
-            return null;
+            throw new InvalidUrlException("Invalid url.");
         }
 
-        // Split by /
         $pieces = explode($url, "/");
         $route = $pieces[0];
         array_shift($pieces);
 
-        // Add rest of arguments
         switch ($_SERVER['REQUEST_METHOD']) {
             case 'GET':
                 $arguments = $pieces;

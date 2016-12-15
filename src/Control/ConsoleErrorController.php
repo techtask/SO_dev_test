@@ -11,7 +11,7 @@ class ConsoleErrorController extends AbstractController
         } else {
             $error = "";
         }
-        $this->displayHelp($error);
+        return $this->displayHelp($error);
     }
 
     private function displayHelp($error)

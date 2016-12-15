@@ -22,4 +22,9 @@ class Route
     {
         return $this->arguments;
     }
+
+    public function setArgument($key, $value)
+    {
+        $this->arguments[$key] = $value;
+    }
 }
