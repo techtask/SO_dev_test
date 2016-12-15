@@ -13,14 +13,19 @@ class Bootstrap
    */
   public function init()
   {
+      // FIXME This should be elsewhere. Maybe json.
       $databaseUser = 'me';
       $paths = array(
           "default" => "PostController",
           "post" => "PostController",
-          "author" => "AuthorController"
+          "author" => "AuthorController",
       );
 
-      $config = new Config($databaseUser, $paths);
+      $commandList = array(
+          "import" => "post"
+      );
+
+      $config = new Config($databaseUser, $paths, $commandList);
     
       // Database
       $db = new Database\DB($config->getDSN());
@@ -47,11 +52,19 @@ class Bootstrap
     
       // Routing
       $routeFactory = new Control\RouteFactory();
-      $urlParser = new Control\UrlParser($routeFactory);
+      $commandValidator = new Validation\CommandValidator($config->getCommandList());
+      $urlValidator = new Validation\UrlValidator();
       $controllerFactory = new Control\ControllerFactory($config->getPaths(), $config->getDefaultPath(), $modelFactories, $viewFactories);
-      $router = new Control\Router($urlParser, $controllerFactory, $config->getDefaultPath());
+      if (Console::isConsole()) {
+        $parser = new Control\CommandParser($routeFactory, $commandValidator, Console::getConsoleArguments());
+      } else {
+        $parser = new Control\UrlParser($routeFactory, $urlValidator);
+      }
+
+      $router = new Control\Router($parser, $controllerFactory, $routeFactory->create($config->getDefaultPath(), array()));
 
       $app = new Control\FrontController($router);
       $app->run();
   }
+
 }

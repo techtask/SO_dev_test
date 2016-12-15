@@ -9,7 +9,7 @@ namespace silverorange\DevTest\Validation;
  *
  */
 
-class URLValidator
+class UrlValidator
 {
     /**
    * Validate a url. Note that this is vastly incomplete. Included only for completions sake.

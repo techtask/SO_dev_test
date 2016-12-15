@@ -13,29 +13,32 @@ class Router
     protected $controllerFactory;
     protected $defaultRoute;
 
-    public function __construct(UrlParser $parser, ControllerFactory $controllerFactory, $defaultRoute)
+    public function __construct(ParserInterface $parser, ControllerFactory $controllerFactory, Route $defaultRoute)
     {
         $this->parser = $parser;
         $this->controllerFactory = $controllerFactory;
         $this->defaultRoute = $defaultRoute;
     }
 
-    public function route($url)
+    public function route($route)
     {
         try {
-            $route = $this->parser->parseRoute($url);
+            $route = $this->parser->parseRoute($route);
         } catch (\Exception $e) {
             // No route found, send to default.
-      // Note this is really validated twice since it is also done in controllerFactory.
-      $route = $this->defaultRoute();
+            // Note this is really validated twice since it is also done in controllerFactory.
+            $route = $this->defaultRoute();
         }
 
+        $result = "";
         try {
             $controller = $this->controllerFactory->createController($route);
-            $controller->runAction();
+            $result = $controller->runAction();
         } catch (\Exception $e) {
             // Invalid Route specified, handle this above.
-      throw new InvalidRouteException("Invalid route or arguments specified.");
+            throw new InvalidRouteException("Invalid route or arguments specified.");
         }
+
+        return $result;
     }
 }
