@@ -16,7 +16,7 @@ abstract class AbstractController
     public function __construct(ModelFactoryInterface $modelFactory, ViewFactoryInterface $viewFactory, ArgumentValidator $argumentValidator, array $arguments)
     {
         $this->modelFactory = $modelFactory;
-        $this->ViewFactory = $viewFactory;
+        $this->viewFactory = $viewFactory;
         $this->argumentValidator = $argumentValidator;
         $this->arguments = $arguments;
     }
