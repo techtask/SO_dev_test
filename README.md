@@ -22,6 +22,7 @@ A few things I ran out of time for:
 * Request/Response objects and dispatcher. These I skipped for brevity.
 * Real templating. I decided to use php native templating for simplicity. Twig would probably have been better.
 * Tests, phpdoc comments.
+* Exception Handler and Logging. I would use the psr-3 logger, but I don't see a particular use for it in this project.
 
 
 silverorange Developer Test

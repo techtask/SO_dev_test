@@ -2,4 +2,6 @@
 
 Here is a list of valid commands:
 
-import [post files in json format]
+tool import-posts [files]
+tool show-post [post-id]
+tool list-posts
