@@ -19,13 +19,17 @@ class Bootstrap
           "default" => "PostController",
           "post" => "PostController",
           "author" => "AuthorController",
+          "error" => "ErrorController"
       );
 
       $commandList = array(
-          "import" => "post"
+          "default" => "ConsoleErrorController",
+          "import" => "ConsoleImportController",
+          "error" => "ConsoleErrorController",
+          "help" => "ConsoleErrorController",
       );
 
-      $config = new Config($databaseUser, $paths, $commandList);
+      $config = new Config($databaseUser, $paths, $commandList, "default");
     
       // Database
       $db = new Database\DB($config->getDSN());
@@ -55,9 +59,9 @@ class Bootstrap
       $commandValidator = new Validation\CommandValidator($config->getCommandList());
       $urlValidator = new Validation\UrlValidator();
       $argumentValidator = new Validation\ArgumentValidator();
-      $controllerFactory = new Control\ControllerFactory($config->getPaths(), $config->getDefaultPath(), $modelFactories, $viewFactories, $argumentValidator);
+      $controllerFactory = new Control\ControllerFactory($config->getPaths(), $config->getDefaultPath(), $modelFactories, $viewFactories, $argumentValidator, $config->getCommandList());
       if (Console\Console::isConsole()) {
-        $parser = new Control\CommandParser($routeFactory, $commandValidator, Console\Console::getConsoleArguments());
+        $parser = new Control\CommandParser($routeFactory, $commandValidator, Console\Console::getConsoleArguments(), $config->getCommandList());
       } else {
         $parser = new Control\UrlParser($routeFactory, $urlValidator);
       }

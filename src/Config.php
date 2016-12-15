@@ -8,13 +8,15 @@ class Config
     protected $dsn = 'pgsql:host=localhost;dbname=silverorange_dev_test;';
     protected $paths = array();
     protected $commandList = array();
+    protected $defaultPath;
 
-    public function __construct($username, Array $paths, Array $commandList)
+    public function __construct($databaseUsername, Array $paths, Array $commandList, $defaultPath)
     {
-        $this->username = $username;
+        $this->databaseUsername = $databaseUsername;
         $this->dsn = $this->dsn . 'user=' . $this->username;
         $this->paths = $paths;
         $this->commandList = $commandList;
+        $this->defaultPath = $defaultPath;
     }
 
     public function getDSN()
@@ -29,8 +31,7 @@ class Config
 
     public function getDefaultPath()
     {
-        // FIXME This is hardcoded.. No schema validation for paths, or the rest of this config...
-        return $this->paths["default"];
+        return $this->defaultPath;
     }
 
     public function getCommandList()

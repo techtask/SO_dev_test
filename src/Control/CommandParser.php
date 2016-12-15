@@ -13,18 +13,26 @@ class CommandParser implements RouteParserInterface
     protected $routeFactory;
     protected $commandValidator;
     protected $arguments = array();
+    protected $commandList = array();
 
-    public function __contstruct(RouteFactory $routeFactory, CommandValidator $commandValidator, Array $arguments)
+    public function __contstruct(RouteFactory $routeFactory, CommandValidator $commandValidator, Array $arguments, Array $commandList)
     {
         $this->routeFactory = $routeFactory;
         $this->commandValidator = $commandValidator;
         $this->arguments = $arguments;
+        $this->commandList = $commandList;
     }
 
     public function parseRoute($command = null)
     {
-        $command = $this->arguments[0];
-        $url = $this->CommandValidator->normalize($command);
+        try {
+            $command = $this->arguments[0];
+            $command = $this->commandValidator->normalize($command);
+        }
+        catch (\Exception $e)
+        {
+            throw new InvalidCommandException("Invalid command specified. Try \"help\".");
+        }
 
         if ($this->CommandValidator->validate($command) !== true) {
             throw new InvalidCommandException("Unknown command $command.");
