@@ -14,4 +14,8 @@ abstract class AbstractModel
     }
 
     abstract public function save();
+
+    abstract public function update();
+
+    abstract public function destroy();
 }

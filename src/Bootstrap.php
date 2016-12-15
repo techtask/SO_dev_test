@@ -27,7 +27,7 @@ class Bootstrap
           "default" => "ConsoleErrorController",
           "import-posts" => "ConsoleImportController",
           "show-post" => "ConsolePostController",
-          "list-posts" => "ConsoleImportController",
+          "list-posts" => "ConsoleListPostsController",
           "error" => "ConsoleErrorController",
           "help" => "ConsoleErrorController",
       );
@@ -43,6 +43,7 @@ class Bootstrap
       // Models
       $postValidator = new Validation\ImportPostValidator();
       $postModelFactory = new Model\PostModelFactory($postCRUD);
+      $postWithAuthorModelFactory = new Model\PostWithAuthorModelFactory($postCRUD);
       $authorModelFactory = new Model\AuthorModelFactory($authorCRUD);
       $importPostModelFactory = new Model\ImportPostModelFactory($postCRUD, $postModelFactory, $postValidator);
       // This is a hack, should really be done dynamically, but left this way for simplicity.
@@ -52,7 +53,7 @@ class Bootstrap
         "author" => $authorModelFactory,
         "import-posts" => $importPostModelFactory,
         "show-post" => $postModelFactory,
-        "list-posts" => $postModelFactory,
+        "list-posts" => $postWithAuthorModelFactory,
         "error" => $postModelFactory, // FIXME same here
         "help" => $postModelFactory// FIXME same issue.
       );

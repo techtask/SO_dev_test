@@ -58,6 +58,26 @@ class PostCRUD extends DatabaseAccessLayer
         return $data[0];
     }
 
+    public function readAllWithAuthors()
+    {
+        $pdo = $this->db->getConnection();
+        try {
+            $stmt = $pdo->prepare("SELECT * FROM posts INNER JOIN authors ON posts.author = authors.id"); 
+            $stmt->execute();
+            $data = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+            $count = $stmt->rowCount();
+            if($count === 0) {
+                throw new NoSuchRecordException("No matches were found.");
+            }
+        }
+        catch (\PDOException $e) {
+            // FIXME Error handling here.
+            echo "Error: " . $e->getMessage();
+            return null;
+        }
+        return $data;
+    }
+
     public function update($id, $title, $body, $created_at, $modified_at, $author)
     {
         $pdo = $this->db->getConnection();

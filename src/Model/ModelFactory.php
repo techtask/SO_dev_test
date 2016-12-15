@@ -7,7 +7,7 @@ use silverorange\DevTest\Database\DatabaseAccessInterface;
 
 class ModelFactory implements ModelFactoryInterface
 {
-    protected $dal;
+    public $dal;
 
     public function __construct(DatabaseAccessInterface $dal)
     {
