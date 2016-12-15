@@ -2,6 +2,8 @@
 
 namespace silverorange\DevTest\Database;
 
+use silverorange\DevTest\Exceptions\NoSuchRecordException;
+
 class PostCRUD extends DatabaseAccessLayer
 {
     public function create($id, $title, $body, $created_at, $modified_at, $author)
@@ -9,7 +11,7 @@ class PostCRUD extends DatabaseAccessLayer
         $pdo = $this->db->getConnection();
         try {
             $pdo->beginTransaction();
-            $stmt = $pdo->prepare("INSERT INTO posts (id, title, body, created_at, modified_at, author) VALUES (:id, :title, :body, :created_at, :modified_at, :author");
+            $stmt = $pdo->prepare("INSERT INTO posts (id, title, body, created_at, modified_at, author) VALUES (:id, :title, :body, :created_at, :modified_at, :author)");
             $stmt->bindParam(":id",$id);
             $stmt->bindParam(":title",$title);
             $stmt->bindParam(":body",$body);
@@ -17,13 +19,21 @@ class PostCRUD extends DatabaseAccessLayer
             $stmt->bindParam(":modified_at",$modified_at);
             $stmt->bindParam(":author",$author);
             $res = $stmt->execute();
+            $pdo->commit();
+
             if ($res !== true) {
                return false;
             }
-            $pdo->commit();
+
+            $count = $stmt->rowCount();
+            if($count === 0) {
+                throw new NoSuchRecordException("No Insert was performed.");
+            }
         }
         catch (\PDOException $e) {
             // FIXME Error handling here.
+            echo "WHAT IS IT?" . $e->getMessage();
+            $pdo->rollback();
             return false;
         }
         return true;
@@ -57,13 +67,19 @@ class PostCRUD extends DatabaseAccessLayer
             $stmt->bindParam(":modified_at",$modified_at);
             $stmt->bindParam(":author",$author);
             $res = $stmt->execute();
+            $pdo->commit();
+
             if ($res !== true) {
                return false;
             }
-            $pdo->commit();
+            $count = $stmt->rowCount();
+            if($count === 0) {
+                throw new NoSuchRecordException("No updates were made.");
+            }
         }
         catch (\PDOException $e) {
             // FIXME Error handling here.
+            $pdo->rollback();
             return false;
         }
         return true;
@@ -80,10 +96,15 @@ class PostCRUD extends DatabaseAccessLayer
             if ($res !== true) {
                return false;
             }
+            $count = $stmt->rowCount();
+            if($count === 0) {
+                throw new NoSuchRecordException("No deletions were made.");
+            }
             $pdo->commit();
         }
         catch (\PDOException $e) {
             // FIXME Error handling here.
+            $pdo->rollback();
             return false;
         }
         return true;
