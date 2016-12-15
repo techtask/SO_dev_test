@@ -51,7 +51,13 @@ class Bootstrap
       );
 
       // Views
-      $viewFactory = new View\ViewFactory();
+      if (Console\Console::isConsole()) {
+        $sanitizer = new Validation\ConsoleSanitizer(); 
+        $viewFactory = new View\ViewFactory($sanitizer);
+      } else {
+        $sanitizer = new Validation\HtmlSanitizer(); 
+        $viewFactory = new View\ViewFactory($sanitizer);
+      }
     
       // Routing
       $routeFactory = new Control\RouteFactory();

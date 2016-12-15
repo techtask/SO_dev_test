@@ -2,7 +2,7 @@
 
 namespace silverorange\DevTest\Validation;
 
-class ConsoleSanitizer
+class ConsoleSanitizer implements SanitizerInterface
 {
     /**
      * This is a placeholder. Should really do regex/fork/parenthesis and encoding checking.
