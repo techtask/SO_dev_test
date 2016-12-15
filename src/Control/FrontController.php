@@ -7,17 +7,15 @@ use silverorange\DevTest\Console\Console;
 class FrontController
 {
     protected $router;
-    protected $controllerFactory;
 
-    public function __construct(Router $router, ControllerFactory $controllerFactory)
+    public function __construct(Router $router)
     {
         $this->router = $router;
-        $this->controllerFactory = $controllerFactory;
     }
 
     public function run()
     {
-        if (Console::isConsole !== true) {
+        if (Console::isConsole() !== true) {
             // Normally we would have a request/response object that we send along, but omitted here for simplicity.
             $view = $this->router->route($_SERVER['REQUEST_URI']);
             // At this point we would send a response object, but I am cheating and will just send headers and body.

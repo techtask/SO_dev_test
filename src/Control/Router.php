@@ -13,7 +13,7 @@ class Router
     protected $controllerFactory;
     protected $defaultRoute;
 
-    public function __construct(ParserInterface $parser, ControllerFactory $controllerFactory, Route $defaultRoute)
+    public function __construct(RouteParserInterface $parser, ControllerFactory $controllerFactory, Route $defaultRoute)
     {
         $this->parser = $parser;
         $this->controllerFactory = $controllerFactory;
