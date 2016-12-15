@@ -10,11 +10,11 @@ class ConsoleImportController extends AbstractController
         return $this->displayResults($data);
     }
 
-    private function displayResults()
+    private function displayResults($data)
     {
         if ($data["error"] === true) {
             $view = $this->viewFactory->create("ConsoleErrorView");
-            $vied->setError($data["error"]);
+            $view->setError($data["error"]);
             return $view;
         } else {
             $view = $this->viewFactory->create("ConsoleImportView");

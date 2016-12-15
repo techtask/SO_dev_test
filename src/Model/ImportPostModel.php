@@ -19,11 +19,10 @@ class ImportPostModel
         $data = array("error" => false);
         $models = array();
         foreach ($files as $file) {
-            try {
-                $contents = file_get_contents($file);
-            } catch (\Exception $e) {
+            $contents = @file_get_contents($file);
+            if ($contents === false) {
                 $data["error"] = true;
-                $data["errorMessage"] = "Error reading file $arg. " . $e->getMessage(); 
+                $data["errorMessage"] = "Error reading file $file.";
                 return $data;
             }
 
@@ -31,25 +30,25 @@ class ImportPostModel
                 $json = json_decode($contents);
             } catch (\Exception $e) {
                 $data["error"] = true;
-                $data["errorMessage"] = "Invalid json in file $arg. " . $e->getMessage(); 
+                $data["errorMessage"] = "Invalid json in file $file. " . $e->getMessage(); 
                 return $data;
             }
 
             try {
-                $valid = $this->importValidator->validatePostJSON($json);
+                $valid = $this->validator->validatePostJSON($json);
                 if ($valid === true) {
                     // Do the creation here.
                     $model = $this->modelFactory->create($json["id"], $json["title"], $json["body"], $json["modified_at"], $json["created_at"], $json["author"]);
                     $model->save();
                 } else {
                     $data["error"] = true;
-                    $data["errorMessage"] = "Json does not specify correct parameters in file $arg. " . $e->getMessage(); 
+                    $data["errorMessage"] = "Json does not specify correct parameters in file $file.";
                     return $data;
                 }
             }
             catch (\Exception $e) {
                 $data["error"] = true;
-                $data["errorMessage"] = "Error inserting post from file $arg into the database. " . $e->getMessage(); 
+                $data["errorMessage"] = "Error inserting post from file $file into the database. " . $e->getMessage(); 
                 return $data;
             }
 
