@@ -18,6 +18,7 @@ class ConsoleImportController extends AbstractController
             return $view;
         } else {
             $view = $this->viewFactory->create("ConsoleImportView");
+            $view->setData($data);
             return $view;
         }
     }
