@@ -21,7 +21,7 @@ class ImportPostModelFactory extends ModelFactory
     public function create()
     {
         try {
-            $model = new \silverorange\DevTest\Model\ImportPostModel($modelFactory, $validator);
+            $model = new \silverorange\DevTest\Model\ImportPostModel($this->modelFactory, $this->validator);
         } catch (\Exception $e) {
             // FIXME This should not happen. Delegate.
             throw $e;

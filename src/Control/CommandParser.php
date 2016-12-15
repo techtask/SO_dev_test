@@ -42,7 +42,7 @@ class CommandParser implements RouteParserInterface
             throw new InvalidCommandException("Unknown command $command.");
         }
         else {
-            $route = $this->commandList[$command];
+            $route = $command;
         }
 
         return $this->routeFactory->createRoute($route, $this->arguments);
