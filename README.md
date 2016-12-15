@@ -6,11 +6,14 @@ It didn't work out so well, so in the end I just focussed on the Console output.
 
 You can run the test with the tool in the bin directory (tool):
 
+
 ```
 tool list-posts
 tool show-post [id]
 tool import-posts [files]
 ```
+
+Note that I purposefully did not embellish the html templates in order to focus on developing the framework.
 
 It should take minimal effort to allow this to also be accessible via http. It just needs
 a few controllers.
