@@ -4,16 +4,18 @@ namespace silverorange\DevTest;
 
 class Config
 {
-    protected $username;
+    protected $databaseUsername;
+    protected $databasePassword;
     protected $dsn = 'pgsql:host=localhost;dbname=silverorange_dev_test;';
     protected $paths = array();
     protected $commandList = array();
     protected $defaultPath;
 
-    public function __construct($databaseUsername, Array $paths, Array $commandList, $defaultPath)
+    public function __construct($databaseUsername, $databasePassword, Array $paths, Array $commandList, $defaultPath)
     {
         $this->databaseUsername = $databaseUsername;
-        $this->dsn = $this->dsn . 'user=' . $this->username;
+        $this->databasePassword = $databasePassword;
+        $this->dsn = $this->dsn . 'user=' . $this->databaseUsername . ';password=' . $this->databasePassword;
         $this->paths = $paths;
         $this->commandList = $commandList;
         $this->defaultPath = $defaultPath;

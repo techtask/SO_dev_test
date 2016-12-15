@@ -27,6 +27,11 @@ class Post extends AbstractModel
         $this->author = $author;
     }
 
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
     public function save()
     {
         try {

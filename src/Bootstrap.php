@@ -14,7 +14,8 @@ class Bootstrap
   public function init($arguments = null)
   {
       // FIXME This should be elsewhere. Maybe json.
-      $databaseUser = 'me';
+      $databaseUser = getenv('PG_USER');
+      $databasePassword = getenv('PG_PASS');
       $paths = array(
           "default" => "ErrorController",
           "post" => "PostController",
@@ -29,7 +30,7 @@ class Bootstrap
           "help" => "ConsoleErrorController",
       );
 
-      $config = new Config($databaseUser, $paths, $commandList, "default");
+      $config = new Config($databaseUser, $databasePassword, $paths, $commandList, "default");
       $console = new Console\Console($arguments);
     
       // Database
