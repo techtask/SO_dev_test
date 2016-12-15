@@ -2,7 +2,7 @@
 
 namespace silverorange\DevTest\Database;
 
-class AuthorCRUD extends AbstractDatabaseAccessLayer
+class AuthorCRUD extends DatabaseAccessLayer
 {
     public function create()
     {

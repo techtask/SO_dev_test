@@ -24,6 +24,7 @@ class DB
     {
         if (!$this->pdo instanceof \PDO) {
             $this->pdo = new \PDO($this->dsn);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         }
 
         return $this->pdo;

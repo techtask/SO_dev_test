@@ -38,16 +38,18 @@ class Bootstrap
       $postCRUD = new Database\PostCRUD($db);
 
       // Models
+      $postValidator = new Validation\ImportPostValidator();
       $postModelFactory = new Model\PostModelFactory($postCRUD);
       $authorModelFactory = new Model\AuthorModelFactory($authorCRUD);
+      $importPostModelFactory = new Model\ImportPostModelFactory($postCRUD, $postModelFactory, $postValidator);
       // This is a hack, should really be done dynamically, but left this way for simplicity.
       $modelFactories = array(
         "default" => $postModelFactory, // FIXME This only works because the default console controller doesn't use it.
         "post" => $postModelFactory,
         "author" => $authorModelFactory,
-        "import" => $postModelFactory,
+        "import" => $importPostModelFactory,
         "error" => $postModelFactory, // FIXME same here
-        "help" => $postModelFactory // FIXME same issue.
+        "help" => $postModelFactory// FIXME same issue.
       );
 
       // Views
@@ -61,6 +63,7 @@ class Bootstrap
     
       // Routing
       $routeFactory = new Control\RouteFactory();
+
       $commandValidator = new Validation\CommandValidator($config->getCommandList());
       $urlValidator = new Validation\UrlValidator();
       $argumentValidator = new Validation\ArgumentValidator();
