@@ -2,7 +2,7 @@
 
 namespace silverorange\DevTest\Model;
 
-use silverorange\DevTest\ModelFactory;
+use silverorange\DevTest\Model\ModelFactory;
 
 class PostModelFactory extends ModelFactory
 {

@@ -19,7 +19,7 @@ class Config
 
     public function getDSN()
     {
-        return $this-dsn;
+        return $this->dsn;
     }
 
     public function getPaths()
