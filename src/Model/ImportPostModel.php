@@ -40,6 +40,7 @@ class ImportPostModel
                     // Do the creation here.
                     $model = $this->modelFactory->create($json["id"], $json["title"], $json["body"], $json["modified_at"], $json["created_at"], $json["author"]);
                     $model->save();
+                    $models[] = $model;
                 } else {
                     $data["error"] = true;
                     $data["errorMessage"] = "Json does not specify correct parameters in file $file.";
@@ -54,7 +55,7 @@ class ImportPostModel
 
 
         }
-        $data["postIds"] = $ids;
+        $data["posts"] = $models;
         return $data;
     }
 }
