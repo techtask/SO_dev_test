@@ -15,7 +15,7 @@ class CommandValidator
     {
         // FIXME This is not great
 
-        if (in_array($command, $this->commandList)) {
+        if (isset($this->commandList[$command])) {
             return true;
         }
         else {

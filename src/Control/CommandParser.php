@@ -29,7 +29,7 @@ class CommandParser implements RouteParserInterface
             if (!empty($this->arguments)) {
                 $command = $this->arguments[0];
             } else {
-                $command = null;
+                throw InvalidCommandException("");
             }
             $command = $this->commandValidator->normalize($command);
         }
@@ -45,6 +45,6 @@ class CommandParser implements RouteParserInterface
             $route = $this->commandList[$command];
         }
 
-        return $this->RouteFactory->createRoute($route, $this->arguments);
+        return $this->routeFactory->createRoute($route, $this->arguments);
     }
 }
