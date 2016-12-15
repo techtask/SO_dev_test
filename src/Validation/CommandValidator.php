@@ -13,7 +13,9 @@ class CommandValidator
 
     public function validate($command)
     {
-        if (in_array($this->commandList, $command)) {
+        // FIXME This is not great
+
+        if (in_array($command, $this->commandList)) {
             return true;
         }
         else {

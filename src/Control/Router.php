@@ -27,7 +27,7 @@ class Router
         } catch (\Exception $e) {
             // No route found, send to default.
             // Note this is really validated twice since it is also done in controllerFactory.
-            $route = $this->defaultRoute();
+            $route = $this->defaultRoute;
         }
 
         $result = "";

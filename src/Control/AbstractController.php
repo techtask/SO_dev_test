@@ -2,7 +2,7 @@
 
 namespace silverorange\DevTest\Control;
 
-class AbstractController
+abstract class AbstractController
 {
     protected $arguments;
     protected $modelFactory;

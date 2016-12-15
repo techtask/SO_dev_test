@@ -11,7 +11,7 @@ class Bootstrap
    * Initialize the application. Dependency injection done here.
    *
    */
-  public function init()
+  public function init($arguments = null)
   {
       // FIXME This should be elsewhere. Maybe json.
       $databaseUser = 'me';
@@ -30,6 +30,7 @@ class Bootstrap
       );
 
       $config = new Config($databaseUser, $paths, $commandList, "default");
+      $console = new Console\Console($arguments);
     
       // Database
       $db = new Database\DB($config->getDSN());
@@ -46,22 +47,17 @@ class Bootstrap
       );
 
       // Views
-      $postViewFactory = new View\PostViewFactory();
-      $authorViewFactory = new View\AuthorViewFactory();
-      // This is a hack, should really be done dynamically, but left this way for simplicity.
-      $viewFactories = array(
-        "post" => $postViewFactory,
-        "author" => $authorViewFactory,
-      );
+      $viewFactory = new View\ViewFactory();
     
       // Routing
       $routeFactory = new Control\RouteFactory();
       $commandValidator = new Validation\CommandValidator($config->getCommandList());
       $urlValidator = new Validation\UrlValidator();
       $argumentValidator = new Validation\ArgumentValidator();
-      $controllerFactory = new Control\ControllerFactory($config->getPaths(), $config->getDefaultPath(), $modelFactories, $viewFactories, $argumentValidator, $config->getCommandList());
+      $controllerFactory = new Control\ControllerFactory($config->getPaths(), $config->getDefaultPath(), $modelFactories, $viewFactory, $argumentValidator, $config->getCommandList());
+
       if (Console\Console::isConsole()) {
-        $parser = new Control\CommandParser($routeFactory, $commandValidator, Console\Console::getConsoleArguments(), $config->getCommandList());
+        $parser = new Control\CommandParser($routeFactory, $commandValidator, $console->getConsoleArguments(), $config->getCommandList());
       } else {
         $parser = new Control\UrlParser($routeFactory, $urlValidator);
       }

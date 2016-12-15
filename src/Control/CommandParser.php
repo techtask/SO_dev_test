@@ -4,8 +4,8 @@ namespace silverorange\DevTest\Control;
 
 use silverorange\DevTest\Validation\CommandValidator;
 use silverorange\DevTest\Control\RouteFactory;
-use silverorange\DevTest\Exceptions\InvalidMethodException;
 use silverorange\DevTest\Control\RouteParserInterface;
+use silverorange\DevTest\Exceptions\InvalidCommandException;
 
 class CommandParser implements RouteParserInterface
 {
@@ -15,7 +15,7 @@ class CommandParser implements RouteParserInterface
     protected $arguments = array();
     protected $commandList = array();
 
-    public function __contstruct(RouteFactory $routeFactory, CommandValidator $commandValidator, Array $arguments, Array $commandList)
+    public function __construct(RouteFactory $routeFactory, CommandValidator $commandValidator, Array $arguments, Array $commandList)
     {
         $this->routeFactory = $routeFactory;
         $this->commandValidator = $commandValidator;
@@ -34,7 +34,7 @@ class CommandParser implements RouteParserInterface
             throw new InvalidCommandException("Invalid command specified. Try \"help\".");
         }
 
-        if ($this->CommandValidator->validate($command) !== true) {
+        if ($this->commandValidator->validate($command) !== true) {
             throw new InvalidCommandException("Unknown command $command.");
         }
         else {

@@ -2,7 +2,7 @@
 
 namespace silverorange\DevTest\View;
 
-class AuthorViewFactory
+class ViewFactory
 {
     public function create($name)
     {
@@ -12,5 +12,6 @@ class AuthorViewFactory
         } catch (\Exception $e) {
             throw new InvalidViewException("No such view.");
         }
+        return $view;
     }
 }
